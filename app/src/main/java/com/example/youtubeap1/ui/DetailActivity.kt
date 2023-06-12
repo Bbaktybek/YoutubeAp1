@@ -23,7 +23,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
     override fun setUI() {
         super.setUI()
         adapter = PlayListsAdapter()
-        binding.recyclerView1.adapter = adapter
+        binding.recyclerView.adapter = adapter
     }
 
     override fun setupLiveData() {
@@ -35,7 +35,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
             viewModel.playlistsItems(getIntent!!).observe(this) {
                 when (it.status) {
                     Status.SUCCESS -> {
-                        binding.recyclerView1.adapter = adapter
+                        binding.recyclerView.adapter = adapter
                         it.data?.let { it1 -> adapter.addList(it1.items) }
                         binding.progressBar.isVisible = false
                     }
@@ -56,10 +56,10 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
         ConnectionLiveData(application).observe(this) {
             if (it) {
 //                binding.noInternetConnectionInclude1.visibility = View.VISIBLE
-                binding.noConnnection.visibility = View.GONE
+                binding.noConnection.visibility = View.GONE
             } else {
 //                binding.noInternetConnectionInclude1.visibility = View.GONE
-                binding.noConnnection.visibility = View.VISIBLE
+                binding.noConnection.visibility = View.VISIBLE
                 setupLiveData()
             }
         }
